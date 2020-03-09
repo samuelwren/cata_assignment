@@ -60,4 +60,31 @@
     }
   }
 
+
+  //Determine which functions to call
+  if( isset( $argvs["--help"] ) )
+  {
+      help();
+  }
+  if( isset($argvs["--create_table"]) )
+  {
+      create_table();
+  }
+  if( isset($argvs["-u"]) )
+  {
+      update_config($argvs["-u"], '$username');
+  }
+  if( isset($argvs["-p"]) )
+  {
+      update_config($argvs["-p"], '$password');
+  }
+  if( isset($argvs["-h"]) )
+  {
+      update_config($argvs["-h"], '$host');
+  }
+  if( isset($argvs["--file"]) )
+  {
+      insert_data($argvs["--file"]);
+  }
+
 ?>
