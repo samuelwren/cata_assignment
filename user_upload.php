@@ -126,24 +126,43 @@
 
   function insert_data( $file )
   {
+    // imports connectdb.php
+    include( 'connectdb.php' );
+
+    // Opens connection
+    $connection = OpenConn();
+
     // Maps CSV into an Array
     $csv = array_map('str_getcsv', file($file . '.csv'));
 
     $counter          = 0;
     $column_length   = 0;
-    foreach($csv as $data) {
+    foreach($csv as $data)
+    {
       if( $counter > 0 && count( $data ) >= $column_length)
       {
-        $values = "'" . implode("','", $data) . "' \n";
-        echo $values;
+        // Puts $data into a string
+        $values = "'" . implode("','", $data);
+        // Insert Query
+        $sql = "INSERT INTO users (name, surname, email) VALUES ($values)";
+
+        if ($connection->query($sql)) {
+            echo "Inserted User succuessful";
+        } else {
+            echo "Error creating table: " . $connection->error;
+        }
+
       }
       else if( $counter == 0 )
       {
         $column_length = count ( $data );
       }
-      
+
       $counter++;
     }
+
+    // Closes connection
+    CloseConn( $connection );
   }
 
 ?>
