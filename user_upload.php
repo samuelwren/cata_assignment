@@ -129,9 +129,20 @@
     // Maps CSV into an Array
     $csv = array_map('str_getcsv', file($file . '.csv'));
 
+    $counter          = 0;
+    $column_length   = 0;
     foreach($csv as $data) {
-      $values = "'" . implode("','", $data) . "'";
-      echo $values;
+      if( $counter > 0 && count( $data ) >= $column_length)
+      {
+        $values = "'" . implode("','", $data) . "' \n";
+        echo $values;
+      }
+      else if( $counter == 0 )
+      {
+        $column_length = count ( $data );
+      }
+      
+      $counter++;
     }
   }
 
