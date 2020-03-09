@@ -132,6 +132,12 @@
     // Opens connection
     $connection = OpenConn();
 
+    if( !table_exist( $connection ) )
+    {
+      echo "Table Users does not exist. \n";
+      echo "--help for more information.";
+    }
+
     // Maps CSV into an Array
     $csv = array_map('str_getcsv', file($file . '.csv'));
 

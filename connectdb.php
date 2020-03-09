@@ -17,6 +17,20 @@
     return $conn;
   }
 
+  // Determines if the table exist
+  function table_exist( $conn )
+  {
+    $sql = "SELECT 1 FROM Users LIMIT 0";;
+  	if( $conn->query($sql) )
+    {
+      return TRUE;
+    }
+  	else
+    {
+  		return FALSE;
+    }
+  }
+
   // Closes connection to DB
   function CloseConn( $conn )
   {
