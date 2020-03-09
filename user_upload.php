@@ -168,11 +168,16 @@
   function update_config($value, $variable)
   {
     // File name
-    $file = 'config.php';
+    $file         = 'config.php';
     // Open the file to get existing content
     $file_content = file_get_contents($file);
+    // Removes PHP tags and any white space
+    $new_content  = str_replace('<?php', '',$file_content);
+    $new_content  = str_replace('?>', '',$new_connent);
+    $new_content  = trim($new_connent);
+    $new_content  = explode("\n", $new_connent);
 
-    foreach($file_content as $content){
+    foreach($new_content as $content){
         echo $content;
     }
   }
