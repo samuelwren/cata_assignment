@@ -98,4 +98,17 @@
     echo " -h – MySQL host";
   }
 
+  function create_table()
+  {
+    // imports connectdb.php
+    include( 'connectdb.php' );
+
+    // Opens connection
+    $connection = OpenConn();
+
+    // Closes connection
+    CloseConn( $connection );
+
+  }
+
 ?>
