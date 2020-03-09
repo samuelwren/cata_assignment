@@ -177,9 +177,20 @@
     $new_content  = trim($new_connent);
     $new_content  = explode("\n", $new_connent);
 
-    foreach($new_content as $content){
-        echo $content;
+    // Changes the variable of the selected argument
+    $updated_content = "";
+    foreach( $new_content as $content )
+    {
+      if( strpos( $content, $variable ) !== FALSE ) {
+          $updated_content .= $variable . " = '" . $value . "'; \n";
+      } else {
+          $updated_content .= $content . "\n";
+      }
     }
+
+    // Puts the PHP tags back in
+    $updated_content = "<?php \n" . $updated_content . "?>";
+    echo $updated_content;
   }
 
 ?>
