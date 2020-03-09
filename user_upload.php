@@ -122,7 +122,17 @@
 
     // Closes connection
     CloseConn( $connection );
+  }
 
+  function insert_data( $file )
+  {
+    // Maps CSV into an Array
+    $csv = array_map('str_getcsv', file($file . '.csv'));
+
+    foreach($csv as $data) {
+      $values = "'" . implode("','", $data) . "'";
+      echo $values;
+    }
   }
 
 ?>
