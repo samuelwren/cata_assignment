@@ -190,7 +190,9 @@
 
     // Puts the PHP tags back in
     $updated_content = "<?php \n" . $updated_content . "?>";
-    echo $updated_content;
+
+    // Write the contents back to the file
+    file_put_contents($file, $updated_content);
   }
 
 ?>
