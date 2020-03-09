@@ -18,9 +18,9 @@
   }
 
   // Closes connection to DB
-  function CloseConn()
+  function CloseConn( $conn )
   {
-
+      $conn->close();
   }
 
 ?>
