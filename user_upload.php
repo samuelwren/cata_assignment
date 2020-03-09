@@ -106,6 +106,20 @@
     // Opens connection
     $connection = OpenConn();
 
+    $sql = "CREATE TABLE IF NOT EXISTS Users (
+              id INT AUTO_INCREMENT PRIMARY KEY,
+              name VARCHAR(50) NOT NULL,
+              surname VARCHAR(50) NOT NULL,
+              email VARCHAR(100) NOT NULL,
+              UNIQUE KEY unique_email (email)
+          );";
+
+    if ($connection->query($sql)) {
+        echo "Table Users, successfully created.";
+    } else {
+        echo "Error creating table: " . $connection->error;
+    }
+
     // Closes connection
     CloseConn( $connection );
 
