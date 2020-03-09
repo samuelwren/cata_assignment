@@ -165,4 +165,16 @@
     CloseConn( $connection );
   }
 
+  function update_config($value, $variable)
+  {
+    // File name
+    $file = 'config.php';
+    // Open the file to get existing content
+    $file_content = file_get_contents($file);
+
+    foreach($file_content as $content){
+        echo $content;
+    }
+  }
+
 ?>
