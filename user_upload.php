@@ -136,6 +136,7 @@
     {
       echo "Table Users does not exist. \n";
       echo "--help for more information.";
+      exit();
     }
 
     // Maps CSV into an Array
@@ -147,15 +148,27 @@
     {
       if( $counter > 0 && count( $data ) >= $column_length)
       {
-        // Puts $data into a string
-        $values = "'" . implode("','", $data);
-        // Insert Query
-        $sql = "INSERT INTO users (name, surname, email) VALUES ($values)";
+        // Trims and filters data into how they shoud be
+        $name     = trim( ucfirst( strtolower( $data[0] ) ) );
+        $surname  = trim( ucfirst( strtolower( $data[1] ) ) );
+        $email    = trim( strtolower( $data[2] ) );
 
-        if ($connection->query($sql)) {
-            echo "Inserted User succuessful";
-        } else {
-            echo "Error creating table: " . $connection->error;
+        // determines if email is valid
+        if( filter_var( $email, FILTER_VALIDATE_EMAIL ) )
+        {
+          // Insert Query
+          $sql = "INSERT INTO users (name, surname, email)
+                  VALUES ('$name', '$surname', '$email')";
+
+          if ( $connection->query($sql) ) {
+              echo "Inserted User succuessful";
+          } else {
+              echo "Error creating table: " . $connection->error;
+          }
+        }
+        else
+        {
+          echo $email . " is not a valid email. On line: " . ($counter + 1) . " \n";
         }
 
       }
